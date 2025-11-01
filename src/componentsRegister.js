@@ -1,0 +1,33 @@
+import { defineAsyncComponent } from "vue";
+
+export const registerComponent = (app) => {
+    app.component(
+        "header-component",
+        defineAsyncComponent(() => import("./components/Header.vue"))
+    )
+    app.component(
+        "footer-component",
+        defineAsyncComponent(() => import("./components/Footer.vue"))
+    )
+    app.component(
+        "library-component",
+        defineAsyncComponent(() => import("./components/Library.vue"))
+    )
+    app.component(
+        "music-info-component",
+        defineAsyncComponent(() => import("./components/MusicInfo.vue"))
+    )
+    app.component(
+        "most-listened-component",
+        defineAsyncComponent(() => import("./components/musicPresentationComponents/MostListenedMusics.vue"))
+    )
+    app.component(
+        "suggested-musics-component",
+        defineAsyncComponent(() => import("./components/musicPresentationComponents/SuggestedMusics.vue"))
+    )
+    app.component(
+        "suggested-albums-component",
+        defineAsyncComponent(() => import("./components/musicPresentationComponents/SuggestedAlbums.vue"))
+    )
+
+}
