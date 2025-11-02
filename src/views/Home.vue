@@ -14,8 +14,10 @@
                     </ul>
                 </nav>
             </section>
-            <section>
+            <section class="components-content">
                 <most-listened-component />
+                <suggested-musics-component />
+                <suggested-albums-component />
             </section>
         </section>
     </main>
@@ -25,6 +27,16 @@
 main {
     background: linear-gradient(#EB5160 20%, #0F0F0F 80%);
     width: 100%;
+    overflow-x: hidden;
+}
+
+main .library-artist-info {
+    line-height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
 
 .max-width-content {
@@ -53,5 +65,9 @@ main li {
     background-color: #2F2F2F;
     border-radius: 20px;
     padding: 7px 5px;
+}
+
+main .components-content {
+    margin: 25px 0px;
 }
 </style>
