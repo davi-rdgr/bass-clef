@@ -1,6 +1,17 @@
 import { defineAsyncComponent } from "vue";
 
 export const registerComponent = (app) => {
+    //layouts:
+    app.component(
+        "login-layout",
+        defineAsyncComponent(() => import('./layouts/loginLayout.vue'))
+    )
+    app.component(
+        "standart-layout",
+        defineAsyncComponent(() => import('./layouts/standartLayout.vue'))
+    )
+
+    
     app.component(
         "header-component",
         defineAsyncComponent(() => import("./components/Header.vue"))

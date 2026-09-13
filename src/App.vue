@@ -1,28 +1,35 @@
-<script setup>
+<script>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+export default {
+  setup() {
+    const route = useRoute();
+    const layout = computed(() => {
+      const layout = route.meta.layout;
+      if (layout) {
+        return layout;
+      }
+      return "div";
+    })
+    return {
+      layout,
+    };
+  }
+}
 </script>
 
 <template class="template">
-  <header-component />
-  <div class="template-content">
-    <library-component />
+  <component :is="layout">
     <router-view />
-    <music-info-component />
-  </div>
-  <footer-component />
+  </component>
 </template>
 
 <style scoped>
-.template {
+/* .template {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-}
-
-.template-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  overflow-x: hidden;
-}
+} */
 </style>
