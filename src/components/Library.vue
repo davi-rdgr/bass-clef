@@ -9,7 +9,7 @@
                 Biblioteca
             </span>
             <a class="">
-                +
+            <i class="plus-btn fa-solid fa-plus"></i>
             </a>
         </div>
         <div class="library-content">
@@ -146,14 +146,20 @@ aside .library-header span {
 }
 
 aside .library-header a {
-    font-size: 20px;
+font-size: 20px;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: #D9D9D9;
     background-color: #2F2F2F;
-    padding: 0px 20px;
+    padding: 8px 20px;
     text-decoration: none;
     border-radius: 20px;
+}
+
+aside .library-header .plus-btn {
+    font-size: 12px;
+    color: #D9D9D9;
+    display: block;
 }
 
 aside .library-artist-image {

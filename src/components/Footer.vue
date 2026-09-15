@@ -11,30 +11,20 @@
         <div class="player-footer">
             <div class="player-footer-top">
                 <div class="player-tools">
-                    <a href="#">
-                        <img src="/svg/repeat-icon.svg" alt="Repeat">
-                    </a>
+                    <i class="repeat-btn fa-solid fa-repeat"></i>
                     <div class="">
-                        <a href="">
-                            <img src="/svg/previous-icon.svg" alt="Previous">
-                        </a>
-                        <a href="">
-                            <img src="/svg/play-icon.svg" alt="Play">
-                        </a>
-                        <a href="">
-                            <img src="/svg/next-icon.svg" alt="Next">
-                        </a>
+                        <i class="previous-btn fa-solid fa-backward-step"></i>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
+                        <i class="next-btn fa-solid fa-forward-step"></i>
                     </div>
                     <div>
-                        <a href="">
-                            <img src="/svg/random-icon.svg" alt="">
-                        </a>
+                        <i class="random-btn fa-solid fa-shuffle"></i>
                     </div>
                 </div>
                 <div class="volume-footer">
-                    <a href="">
-                        <img src="/svg/speaker-icon.svg" alt="Speaker">
-                    </a>
+                    <i class="speaker-btn fa-solid fa-volume-high"></i>
                     <v-slider class="v-slider-volume" hide-details></v-slider>
                 </div>
             </div>
@@ -52,15 +42,9 @@
                     <span class="visualizer-artist">Pink Floyd</span>
                 </div>
                 <div class="visualizer-options">
-                    <a href="">
-                        <img src="/svg/block-icon.svg" alt="Deslike Music">
-                    </a>
-                    <a href="">
-                        <img src="/svg/add-icon.svg" alt="Add Music">
-                    </a>
-                    <a href="">
-                        <img src="/svg/fullscreen-icon.svg" alt="Fullscreen">
-                    </a>
+                        <i class="deslike-btn fa-solid fa-ban"></i>
+                        <i class="add-btn fa-solid fa-circle-plus"></i>
+                        <i class="full-btn fa-solid fa-expand"></i>
                 </div>
             </div>
             <div class="visualizer-image">
@@ -107,6 +91,32 @@ footer .player-tools {
     align-items: center;
     gap: 50px;
 }
+
+footer .volume-footer .speaker-btn,
+footer .player-tools .repeat-btn,
+footer .player-tools .random-btn,
+footer .player-tools .previous-btn,
+footer .player-tools .next-btn {
+    color: #D9D9D9;
+    font-size: 16px;
+}
+
+footer .play-content {
+    background-color: #D9D9D9;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .play-content .play-btn {
+    color: #0F0F0F;
+    font-size: 16px;
+    display: block;
+}
+
 
 footer .player-tools>div {
     display: flex;
@@ -205,6 +215,24 @@ footer .visualizer-artist {
     font-family: 'Roboto', sans-serif;
     color: #D9D9D9;
     margin-top: 6px;
+}
+
+footer .visualizer-options {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 2px;
+}
+
+footer .visualizer-options .deslike-btn,
+footer .visualizer-options .add-btn {
+    color: #D9D9D9;
+    font-size: 15px;
+}
+
+footer .visualizer-options .full-btn {
+    color: #D9D9D9;
+    font-size: 20px;
 }
 
 footer .visualizer-options a:nth-child(3) {

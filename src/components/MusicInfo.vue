@@ -16,9 +16,7 @@
                             Pink Floyd
                         </span>
                     </div>
-                    <a href="">
-                        <img src="/svg/add-icon-white.svg" alt="Add Music">
-                    </a>
+                    <i class="add-btn fa-solid fa-circle-plus"></i>
                 </div>
             </div>
             <div class="maybe-you-know-content">
@@ -134,6 +132,12 @@ aside .presentation-artist-content {
     justify-content: space-between;
     margin-top: 15px;
     line-height: 100%;
+}
+
+aside .presentation-artist-content .add-btn {
+    color: #D9D9D9;
+    font-size: 14px;
+    display: block;
 }
 
 aside .info-title-presentation {

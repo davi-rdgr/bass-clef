@@ -4,7 +4,13 @@ const tab = ref('one');
 const enterLogin = ref('');
 const enterPassword = ref('');
 const enterCheckbox = ref(false);
-const showPassword = ref(false)
+const enterShowPassword = ref(false)
+
+const createName = ref('');
+const createLogin = ref('');
+const createPassword = ref('');
+const createUserTerms = ref(false);
+const createShowPassword = ref(false);
 </script>
 <template>
     <main>
@@ -64,12 +70,12 @@ const showPassword = ref(false)
                                 <v-label class="vlabel">
                                     SENHA
                                 </v-label>
-                                <v-text-field class="vinput" hide-details :type="showPassword ? 'text' : 'password'"
-                                    variant="outlined" v-model="enterPassword" placeholder="Mínimo 6 caracteres"
-                                    append-inner="MOSTRAR">
+                                <v-text-field class="vinput" hide-details
+                                    :type="enterShowPassword ? 'text' : 'password'" variant="outlined"
+                                    v-model="enterPassword" placeholder="Mínimo 6 caracteres" append-inner="MOSTRAR">
                                     <template #append-inner>
-                                        <span class="show-password" @click="showPassword = !showPassword">
-                                            {{ showPassword ? ' OCULTAR' : 'MOSTRAR' }}
+                                        <span class="show-password" @click="enterShowPassword = !enterShowPassword">
+                                            {{ enterShowPassword ? ' OCULTAR' : 'MOSTRAR' }}
                                         </span>
                                     </template>
                                 </v-text-field>
@@ -108,7 +114,72 @@ const showPassword = ref(false)
                         </div>
                     </v-tabs-window-item>
                     <v-tabs-window-item class="tabwindow" value="register">
-                        <h2>opa opa</h2>
+                        <div>
+                            <h1>
+                                Crie sua conta
+                            </h1>
+                            <h2>
+                                Leva menos de um minuto. É grátis.
+                            </h2>
+                            <v-form class="vform">
+                                <v-label class="vlabel">
+                                    NOME
+                                </v-label>
+                                <v-text-field class="vinput" hide-details type="text" variant="outlined"
+                                    v-model="createName" placeholder="Como devemos te chamar" />
+                                <v-label class="vlabel">
+                                    E-MAIL
+                                </v-label>
+                                <v-text-field class="vinput" hide-details type="email" variant="outlined"
+                                    v-model="createLogin" placeholder="voce@email.com" />
+                                <v-label class="vlabel">
+                                    SENHA
+                                </v-label>
+                                <v-text-field class="vinput" hide-details
+                                    :type="createShowPassword ? 'text' : 'password'" variant="outlined"
+                                    v-model="createPassword" placeholder="Mínimo 6 caracteres" append-inner="MOSTRAR">
+                                    <template #append-inner>
+                                        <span class="show-password" @click="createShowPassword = !createShowPassword">
+                                            {{ createShowPassword ? ' OCULTAR' : 'MOSTRAR' }}
+                                        </span>
+                                    </template>
+                                </v-text-field>
+                                <div class="options">
+                                    <v-checkbox class="vcheck" v-model="createUserTerms"
+                                        base-color="#ffffff" color="#F2555E">
+                                        <template #label>
+                                            <span>
+                                                Concordo com os <span class="terms-highlight">termos de uso</span> e a
+                                                política de privacidade.
+                                            </span>
+                                        </template>
+                                    </v-checkbox>
+                                </div>
+                                <v-btn class="vsubmit" type="submit">
+                                    Entrar
+                                </v-btn>
+                            </v-form>
+                        </div>
+                        <div>
+                            <div class="or-continue">
+                                <div class="line"></div>
+                                <span>
+                                    OU CONTINUE COM
+                                </span>
+                                <div class="line"></div>
+                            </div>
+                            <div class="alternative-login">
+                                <v-btn class="btn">
+                                    Google
+                                </v-btn>
+                                <v-btn class="btn">
+                                    GitHub
+                                </v-btn>
+                            </div>
+                            <span class="create-account">
+                                Já tem uma conta? <span>Entrar</span>
+                            </span>
+                        </div>
                     </v-tabs-window-item>
                 </v-tabs-window>
             </v-sheet>
@@ -332,12 +403,19 @@ ul li {
 
 .vinput:deep(.v-field__outline) {
     color: #1F1F24;
+    --v-field-border-width: 1px;
+}
+
+.vinput:deep(.v-field--focused .v-field__outline) {
+    color: #1F1F24;
+    --v-field-border-width: 1px;
 }
 
 .vinput:deep(.v-field__input) {
     padding: 0;
     min-height: auto;
     height: 44px;
+    outline: none;
 }
 
 .vinput:deep(.v-field__field) {
@@ -371,6 +449,10 @@ ul li {
 
 .vcheck {
     font-size: 13px;
+}
+
+.vcheck:deep(.v-selection-control .v-label) {
+    font-size: 13px !important;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
@@ -384,6 +466,12 @@ ul li {
 
 .vcheck:deep(.v-selection-control__wrapper) {
     width: initial;
+}
+
+.terms-highlight {
+    font-weight: 600;
+    color: #FF8A91;
+    cursor: pointer;
 }
 
 .forgot-pass {

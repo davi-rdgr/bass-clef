@@ -16,16 +16,14 @@ watch(() => searchBar.value, (newValue) => {
     <header>
         <img class="logo-image" src="/images/bass-clef-image.png" alt="Logotipo">
         <div class="navigation-search-container">
-            <a href="" class="navigation-back-container">
-                <img src="/svg/back-icon.svg" alt="Back">
-            </a>
-            <a href="" class="navigation-home-container">
-                <img src="/svg/home-icon.svg" alt="Go to Home">
-            </a>
+            <i class="back-btn fa-solid fa-angle-left"></i>
+            <div href="" class="navigation-home-container">
+                <i class="home-btn fa-solid fa-house"></i>
+            </div>
             <div class="navigation-input-search-container">
                 <v-text-field class="v-text-field" label="Busque suas músicas" v-model="searchBar" single-line
                     hide-details persistent-hint variant="outlined" density="compact" />
-                <img src="/svg/search-icon.svg" alt="Search">
+                <i class="search-btn fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
         <img src="/images/user-image-example.png" alt="User Image">
@@ -59,16 +57,29 @@ header .navigation-search-container {
 
 header .navigation-home-container {
     background-color: #2F2F2F;
-    padding: 10px;
+    height: 38px;
+    width: 38px;
     border-radius: 20px;
-    height: fit-content;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 0 0;
 }
 
 header .navigation-back-container {
     border-radius: 20px;
     height: fit-content;
     display: flex;
+}
+
+header .back-btn {
+    font-size: 22px;
+    color: #D9D9D9;
+}
+
+header .home-btn {
+    font-size: 18px;
+    color: #D9D9D9;
 }
 
 header .v-text-field {
@@ -99,7 +110,9 @@ header .navigation-input-search-container {
     position: relative;
 }
 
-header .navigation-input-search-container img {
+header .navigation-input-search-container .search-btn {
+    font-size: 16px;
+    color: #D9D9D9;
     position: absolute;
     top: 50%;
     left: 11px;
