@@ -4,11 +4,11 @@ export const registerComponent = (app) => {
     //layouts:
     app.component(
         "login-layout",
-        defineAsyncComponent(() => import('./layouts/loginLayout.vue'))
+        defineAsyncComponent(() => import('./layouts/LoginLayout.vue'))
     )
     app.component(
         "standart-layout",
-        defineAsyncComponent(() => import('./layouts/standartLayout.vue'))
+        defineAsyncComponent(() => import('./layouts/StandartLayout.vue'))
     )
 
     
