@@ -11,7 +11,16 @@ export const registerComponent = (app) => {
         defineAsyncComponent(() => import('./layouts/StandartLayout.vue'))
     )
 
-    
+    app.component(
+        "fullscreen-player",
+        defineAsyncComponent(() => import('./components/FullscreenComponent.vue'))
+    )
+
+    app.component(
+        "header-menu-component",
+        defineAsyncComponent(() => import('./components/HeaderMenuComponent.vue'))
+    )
+
     app.component(
         "header-component",
         defineAsyncComponent(() => import("./components/Header.vue"))

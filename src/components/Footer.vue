@@ -1,12 +1,15 @@
 <script setup>
+import { ref } from 'vue';
 /* botar um svg ou lottie de um disco girando em cima da capa do álbum */
+
+const fullscreen = ref(false);
+const undoFullscreen = () => {
+    fullscreen.value = false;
+}
+
 </script>
 
 <template>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
     <footer>
         <div class="player-footer">
             <div class="player-footer-top">
@@ -42,9 +45,9 @@
                     <span class="visualizer-artist">Pink Floyd</span>
                 </div>
                 <div class="visualizer-options">
-                        <i class="deslike-btn fa-solid fa-ban"></i>
-                        <i class="add-btn fa-solid fa-circle-plus"></i>
-                        <i class="full-btn fa-solid fa-expand"></i>
+                    <i class="deslike-btn fa-solid fa-ban"></i>
+                    <i class="add-btn fa-solid fa-circle-plus"></i>
+                    <i @click="fullscreen = true" class="full-btn fa-solid fa-expand"></i>
                 </div>
             </div>
             <div class="visualizer-image">
@@ -52,12 +55,14 @@
             </div>
         </div>
     </footer>
+    <fullscreen-player v-if="fullscreen" @undoFullscreen="undoFullscreen" />
+
 </template>
 
 <style scoped>
 footer {
     background-color: #0F0F0F;
-    padding:20px;
+    padding: 20px;
     border-top: 1px solid #1E1E1E;
 }
 

@@ -26,7 +26,7 @@ watch(() => searchBar.value, (newValue) => {
                 <i class="search-btn fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
-        <img src="/images/user-image-example.png" alt="User Image">
+        <header-menu-component />
     </header>
 </template>
 
