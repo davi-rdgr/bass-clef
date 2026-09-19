@@ -32,24 +32,24 @@ const emits = defineEmits([
                             <div class="player-tools">
                                 <i class="repeat-btn fa-solid fa-repeat"></i>
                                 <div class="">
-                                    <i class="previous-btn fa-solid fa-backward-step"></i>
+                                    <i class="previous-btn fa-solid fa-play fa-flip-horizontal"></i>
                                     <div class="play-content">
-                                        <i class="play-btn fa-solid fa-play"></i>
+                                        <i class="play-btn fa-solid fa-pause"></i>
                                     </div>
-                                    <i class="next-btn fa-solid fa-forward-step"></i>
+                                    <i class="next-btn fa-solid fa-play"></i>
                                 </div>
                                 <div>
                                     <i class="random-btn fa-solid fa-shuffle"></i>
                                 </div>
                             </div>
                             <div class="player-footer-bottom">
-                                <span>0:00</span>
+                                <span>2:28</span>
                                 <v-slider class="v-slider-duration" hide-details></v-slider>
-                                <span>3:45</span>
+                                <span>4:44</span>
                             </div>
                         </div>
                         <div class="volume-footer">
-                            <i class="speaker-btn fa-solid fa-volume-high"></i>
+                            <i class="speaker-btn fa-solid fa-volume-low"></i>
                             <v-slider class="v-slider-volume" hide-details></v-slider>
                         </div>
                     </div>
@@ -218,20 +218,23 @@ const emits = defineEmits([
 .player-tools .next-btn {
     color: #D9D9D9;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .player .play-content {
-    background-color: #D9D9D9;
+    background-color: #EB5160;
     width: 40px;
     height: 40px;
     border-radius: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 20px 4px rgba(235, 81, 96, 0.65);
+    cursor: pointer;
 }
 
 .player .play-content .play-btn {
-    color: #0F0F0F;
+    color: #ffffff;
     font-size: 16px;
     display: block;
 }
@@ -272,6 +275,7 @@ const emits = defineEmits([
 .v-slider-duration:deep(.v-slider-track__fill),
 .v-slider-duration:deep(.v-slider-thumb__surface) {
     background-color: #EB5160 !important;
+    box-shadow: 0px 0px 4px 1px rgba(235, 81, 96, 0.65);
 }
 
 .v-slider-volume:deep(.v-slider-track__background),
