@@ -41,7 +41,8 @@ main .library-artist-info {
 
 .max-width-content {
     width: 100%;
-    max-width: 989px;
+    padding: 0 80px;
+    /* max-width: 989px; */
     margin: 0 auto;
 }
 
@@ -64,7 +65,8 @@ main li {
     color: #ffffff;
     background-color: #2F2F2F;
     border-radius: 20px;
-    padding: 7px 5px;
+    padding: 7px 8px;
+    cursor: pointer;
 }
 
 main .components-content {

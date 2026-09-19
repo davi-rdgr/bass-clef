@@ -101,9 +101,9 @@
 
 <style scoped>
 aside {
-    max-width: 339px;
+    /* max-width: 339px; */
     height: 100%;
-    width: 100%;
+    width: 35%;
     background-color: #0F0F0F;
     padding: 0px 15px 15px 15px;
     overflow-x: hidden;

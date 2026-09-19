@@ -9,7 +9,7 @@
                 Biblioteca
             </span>
             <a class="">
-            <i class="plus-btn fa-solid fa-plus"></i>
+                <i class="plus-btn fa-solid fa-plus"></i>
             </a>
         </div>
         <div class="library-content">
@@ -23,6 +23,9 @@
                             <span class="library-title">Favoritas</span>
                             <span class="library-subtitle">Playlist | 34 músicas</span>
                         </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
                     </li>
                     <li>
                         <div class="library-artist-image">
@@ -31,6 +34,9 @@
                         <div class="library-artist-info">
                             <span class="library-title">Supercombo</span>
                             <span class="library-subtitle">Artista</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
                         </div>
                     </li>
                     <li>
@@ -41,41 +47,8 @@
                             <span class="library-title">Toxicity</span>
                             <span class="library-subtitle">Álbum | System of a Down</span>
                         </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-2.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Grey Chapter</span>
-                            <span class="library-subtitle">Álbum | Slipknot</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-5.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Dark Side of the Moon</span>
-                            <span class="library-subtitle">Álbum | Pink Floyd</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-3.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Selvagens à Procura de Lei</span>
-                            <span class="library-subtitle">Artista</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-6.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Guns And Roses</span>
-                            <span class="library-subtitle">Artista</span>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
                         </div>
                     </li>
                     <li>
@@ -86,6 +59,9 @@
                             <span class="library-title">The Grey Chapter</span>
                             <span class="library-subtitle">Álbum | Slipknot</span>
                         </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
                     </li>
                     <li>
                         <div class="library-artist-image">
@@ -94,6 +70,9 @@
                         <div class="library-artist-info">
                             <span class="library-title">The Dark Side of the Moon</span>
                             <span class="library-subtitle">Álbum | Pink Floyd</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
                         </div>
                     </li>
                     <li>
@@ -104,6 +83,9 @@
                             <span class="library-title">Selvagens à Procura de Lei</span>
                             <span class="library-subtitle">Artista</span>
                         </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
                     </li>
                     <li>
                         <div class="library-artist-image">
@@ -112,6 +94,57 @@
                         <div class="library-artist-info">
                             <span class="library-title">Guns And Roses</span>
                             <span class="library-subtitle">Artista</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="library-artist-image">
+                            <img src="/images/example-2.png" alt="Álbum">
+                        </div>
+                        <div class="library-artist-info">
+                            <span class="library-title">The Grey Chapter</span>
+                            <span class="library-subtitle">Álbum | Slipknot</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="library-artist-image">
+                            <img src="/images/example-5.png" alt="Álbum">
+                        </div>
+                        <div class="library-artist-info">
+                            <span class="library-title">The Dark Side of the Moon</span>
+                            <span class="library-subtitle">Álbum | Pink Floyd</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="library-artist-image">
+                            <img src="/images/example-3.png" alt="Álbum">
+                        </div>
+                        <div class="library-artist-info">
+                            <span class="library-title">Selvagens à Procura de Lei</span>
+                            <span class="library-subtitle">Artista</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="library-artist-image">
+                            <img src="/images/example-6.png" alt="Álbum">
+                        </div>
+                        <div class="library-artist-info">
+                            <span class="library-title">Guns And Roses</span>
+                            <span class="library-subtitle">Artista</span>
+                        </div>
+                        <div class="play-content">
+                            <i class="play-btn fa-solid fa-play"></i>
                         </div>
                     </li>
                 </ul>
@@ -123,9 +156,9 @@
 
 <style scoped>
 aside {
-    max-width: 339px;
+    /* max-width: 339px; */
     height: 100%;
-    width: 100%;
+    width: 35%;
     background-color: #0F0F0F;
     padding: 15px;
     overflow-x: hidden;
@@ -146,7 +179,7 @@ aside .library-header span {
 }
 
 aside .library-header a {
-font-size: 20px;
+    font-size: 20px;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: #D9D9D9;
@@ -180,6 +213,8 @@ aside .library-content li {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 aside .library-content .library-title {
@@ -196,6 +231,35 @@ aside .library-content .library-subtitle {
     font-family: 'Roboto', sans-serif;
     color: #B7999C;
     display: block;
+}
+
+aside .play-content {
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    transform: translate(-50%, -50%);
+    transition: all ease 0.3s;
+    display: flex;
+    align-items: center;
+    background-color: #EB5160;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+aside .play-content .play-btn {
+    color: #ffffff;
+    font-size: 16px;
+    display: block;
+}
+
+
+aside .library-content li:hover .play-content {
+    left: 90%;
 }
 
 aside .library-artist-info {

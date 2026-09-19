@@ -105,7 +105,7 @@ section article .img-wrap::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
     pointer-events: none;
     z-index: 1;
     border-radius: 5px;

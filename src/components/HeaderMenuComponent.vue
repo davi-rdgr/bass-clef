@@ -1,9 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const fav = ref(true)
 const menu = ref(false)
-const message = ref(false)
 const hints = ref(true)
 </script>
 <template>
@@ -15,37 +13,34 @@ const hints = ref(true)
                 </v-btn>
             </template>
 
-            <v-card min-width="300">
-                <v-list>
-                    <v-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-                        subtitle="Founder of Vuetify" title="John Leider">
-                        <template v-slot:append>
-                            <v-btn :class="fav ? 'text-red' : ''" icon="mdi-heart" variant="text"
-                                @click="fav = !fav"></v-btn>
-                        </template>
+            <v-card class="vcard" min-width="300">
+                <v-list class="bg">
+                    <v-list-item prepend-avatar="/images/user-image-example.png"
+                        subtitle="Menu" title="Davi Rodeghiero">
                     </v-list-item>
                 </v-list>
 
-                <v-divider></v-divider>
+                <v-divider color="warning"></v-divider>
 
-                <v-list>
+                <v-list class="bg">
                     <v-list-item>
-                        <v-switch v-model="message" color="purple" label="Enable messages" hide-details></v-switch>
+                        Perfil
+                    </v-list-item>
+                    <v-list-item>
+                        Conta
+                    </v-list-item>
+                    <v-list-item>
+                        Configurações
                     </v-list-item>
 
                     <v-list-item>
-                        <v-switch v-model="hints" color="purple" label="Enable hints" hide-details></v-switch>
+                        <v-switch v-model="hints" color="#EB5160 " label="Manter conectado" hide-details></v-switch>
                     </v-list-item>
                 </v-list>
 
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn variant="text" @click="menu = false">
-                        Cancel
-                    </v-btn>
-                    <v-btn color="primary" variant="text" @click="menu = false">
-                        Save
+                <v-card-actions class="bg">
+                    <v-btn color="#EB5160" variant="text" @click="menu = false">
+                        Sair da conta
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -53,6 +48,10 @@ const hints = ref(true)
     </div>
 </template>
 <style scoped>
+    .bg {
+        background-color: #0F0F0F;
+        color: white;
+    }
     .btn {
         width: fit-content;
         height: fit-content;
@@ -66,5 +65,10 @@ const hints = ref(true)
 
     .btn img {
         display: block;
+    }
+
+    .line {
+            border-top: 1px solid #1E1E1E;
+            color: #1E1E1E;
     }
 </style>

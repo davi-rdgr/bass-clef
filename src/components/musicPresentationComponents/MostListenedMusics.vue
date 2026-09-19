@@ -10,8 +10,8 @@
             <div class="artist-name">
                 <span>Favoritas</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -21,8 +21,8 @@
             <div class="artist-name">
                 <span>Supercombo</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -32,8 +32,8 @@
             <div class="artist-name">
                 <span>The Dark Side of The Moon</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -43,8 +43,8 @@
             <div class="artist-name">
                 <span>Guns and Roses</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -54,8 +54,8 @@
             <div class="artist-name">
                 <span>Cracker Island</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -65,8 +65,8 @@
             <div class="artist-name">
                 <span>Machine Head</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -76,8 +76,8 @@
             <div class="artist-name">
                 <span>Selvanges à Procura de Lei</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
         <article>
@@ -87,8 +87,8 @@
             <div class="artist-name">
                 <span>Black Sabbath</span>
             </div>
-            <div class="play-list-content">
-                <img src="/svg/play-red-icon.svg" alt="Play List Icon">
+            <div class="play-content">
+                <i class="play-btn fa-solid fa-play"></i>
             </div>
         </article>
     </section>
@@ -127,7 +127,7 @@ section .artist-name {
     padding: 5px;
 }
 
-section .play-list-content {
+section .play-content {
     position: absolute;
     top: 50%;
     left: 110%;
@@ -135,9 +135,22 @@ section .play-list-content {
     transition: all ease 0.3s;
     display: flex;
     align-items: center;
+    background-color: #EB5160;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-section article:hover .play-list-content {
+section .play-content .play-btn {
+    color: #ffffff;
+    font-size: 16px;
+    display: block;
+}
+
+section article:hover .play-content {
     left: 90%;
 }
 </style>
