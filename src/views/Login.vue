@@ -1,6 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import router from '@/router';
+import { useAuthStore } from '@/stores/auth';
+import { ref, nextTick } from 'vue';
+
+const auth = useAuthStore();
+
 const tab = ref('one');
+
 const enterLogin = ref('');
 const enterPassword = ref('');
 const enterCheckbox = ref(false);
@@ -11,6 +17,79 @@ const createLogin = ref('');
 const createPassword = ref('');
 const createUserTerms = ref(false);
 const createShowPassword = ref(false);
+const formEnter = ref();
+const formRegister = ref();
+
+
+const nameRule = (value) => {
+    if (!value) {
+        return 'Nome é obrigatório'
+    }
+}
+
+const emailRule = (value) => {
+    if (!value) {
+        return 'E-mail é obrigatório'
+    }
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(value) || 'Digite um e-mail válido'
+}
+
+const passRule = (value) => {
+    if (!value) {
+        return 'Senha é obrigatório';
+    }
+    if (value.length <= 8) {
+        return 'Senha deve conter no mínimo 8 caracteres'
+    }
+    return
+}
+
+const checkboxRule = (value) => {
+    if (!value) {
+        return 'Termos e uso e Política são obrigatórios'
+    }
+    return
+}
+
+const resetValues = async () => {
+    enterLogin.value = '';
+    enterPassword.value = '';
+    enterCheckbox.value = false;
+    enterShowPassword.value = false;
+    createName.value = '';
+    createLogin.value = '';
+    createPassword.value = '';
+    createUserTerms.value = false;
+    createShowPassword.value = false;
+
+    await nextTick();
+    formEnter.value?.resetValidation();
+    formRegister.value?.resetValidation();
+}
+
+const submitLogin = async () => {
+    try {
+        const { valid } = await formEnter.value.validate();
+        if (!valid) return;
+        await auth.login({ email: enterLogin.value, password: enterPassword.value });
+        router.push('/');
+    } catch (error) {
+        throw error;
+    }
+}
+
+const submitRegister = async () => {
+    try {
+        const { valid } = await formRegister.value.validate();
+        if (!valid) return;
+        await auth.register({ name: createName.value, email: createLogin.value, password: createPassword.value });
+        router.push('/');
+    } catch (error) {
+        throw error;
+    }
+}
+
 </script>
 <template>
     <main>
@@ -48,8 +127,8 @@ const createShowPassword = ref(false);
             <v-sheet class="vsheet" elevation="2">
                 <v-tabs class="vtabs" v-model="tab" color="#17070A" bg-color="#0D0D10" selected-class="tab-selected"
                     :hide-slider='true' grow inset>
-                    <v-tab class="vtab" value="enter">Entrar</v-tab>
-                    <v-tab class="vtab" value="register">Criar conta</v-tab>
+                    <v-tab @click="resetValues" class="vtab" value="enter">Entrar</v-tab>
+                    <v-tab @click="resetValues" class="vtab" value="register">Criar conta</v-tab>
                 </v-tabs>
 
                 <v-tabs-window class="vwindow" v-model="tab">
@@ -61,16 +140,16 @@ const createShowPassword = ref(false);
                             <h2>
                                 Entre com seu e-mail para ouvir suas playlists.
                             </h2>
-                            <v-form class="vform">
+                            <v-form ref="formEnter" class="vform" @submit.prevent="submitLogin">
                                 <v-label class="vlabel">
                                     E-MAIL
                                 </v-label>
-                                <v-text-field class="vinput" hide-details type="email" variant="outlined"
-                                    v-model="enterLogin" placeholder="voce@email.com" />
+                                <v-text-field :rules="[emailRule]" class="vinput" hide-details="auto" type="email"
+                                    variant="outlined" v-model="enterLogin" placeholder="voce@email.com" />
                                 <v-label class="vlabel">
                                     SENHA
                                 </v-label>
-                                <v-text-field class="vinput" hide-details
+                                <v-text-field :rules="[passRule]" class="vinput" hide-details="auto"
                                     :type="enterShowPassword ? 'text' : 'password'" variant="outlined"
                                     v-model="enterPassword" placeholder="Mínimo 6 caracteres" append-inner="MOSTRAR">
                                     <template #append-inner>
@@ -121,21 +200,21 @@ const createShowPassword = ref(false);
                             <h2>
                                 Leva menos de um minuto. É grátis.
                             </h2>
-                            <v-form class="vform">
+                            <v-form ref="formRegister" class="vform" @submit.prevent="submitRegister">
                                 <v-label class="vlabel">
                                     NOME
                                 </v-label>
-                                <v-text-field class="vinput" hide-details type="text" variant="outlined"
-                                    v-model="createName" placeholder="Como devemos te chamar" />
+                                <v-text-field :rules="[nameRule]" class="vinput" hide-details="auto" type="text"
+                                    variant="outlined" v-model="createName" placeholder="Como devemos te chamar" />
                                 <v-label class="vlabel">
                                     E-MAIL
                                 </v-label>
-                                <v-text-field class="vinput" hide-details type="email" variant="outlined"
-                                    v-model="createLogin" placeholder="voce@email.com" />
+                                <v-text-field :rules="[emailRule]" class="vinput" hide-details="auto" type="email"
+                                    variant="outlined" v-model="createLogin" placeholder="voce@email.com" />
                                 <v-label class="vlabel">
                                     SENHA
                                 </v-label>
-                                <v-text-field class="vinput" hide-details
+                                <v-text-field :rules="[passRule]" class="vinput" hide-details="auto"
                                     :type="createShowPassword ? 'text' : 'password'" variant="outlined"
                                     v-model="createPassword" placeholder="Mínimo 6 caracteres" append-inner="MOSTRAR">
                                     <template #append-inner>
@@ -145,7 +224,7 @@ const createShowPassword = ref(false);
                                     </template>
                                 </v-text-field>
                                 <div class="options">
-                                    <v-checkbox class="vcheck" v-model="createUserTerms"
+                                    <v-checkbox :rules="[checkboxRule]" class="vcheck" v-model="createUserTerms"
                                         base-color="#ffffff" color="#F2555E">
                                         <template #label>
                                             <span>
@@ -269,7 +348,7 @@ ul li {
     border-radius: 14px;
     max-width: 460px;
     width: 100%;
-    height: 719px;
+    min-height: 719px;
     padding: 30px;
     background-color: #121215;
     border: 1px solid #1F1F24;
@@ -377,7 +456,7 @@ ul li {
     background-color: #0D0D10 !important;
     color: #ffffff;
     margin: 5px 0 0 0;
-    border: 1px solid #2A2A31;
+    /* border: 1px solid #2A2A31; */
     border-radius: 10px;
 }
 
@@ -392,6 +471,12 @@ ul li {
 .vinput:deep(.v-input--indent-details .v-input__details) {
     padding: 0;
 }
+
+.vinput:deep(.v-input__details) {
+    background-color: #121215 !important;
+    padding: 0;
+}
+
 
 .vinput:deep(.v-input__control) {
     height: 44px;
@@ -434,6 +519,7 @@ ul li {
     text-transform: none;
     letter-spacing: normal;
     box-shadow: 0 0 4px 2px #F2555E66 !important;
+    margin: 10px 0 0 0;
 }
 
 .options {
