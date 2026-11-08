@@ -1,4 +1,15 @@
 <script setup>
+import { onMounted } from 'vue';
+import UserRepository from '@/infrastructure/api/user';
+import { useLibraryStore } from '@/stores/library';
+
+const rep = new UserRepository();
+const lib = useLibraryStore();
+
+onMounted(async () => {
+    const response = await rep.getHome();
+    lib.setLibrary(response);
+});
 </script>
 <template>
     <main>
@@ -42,7 +53,6 @@ main .library-artist-info {
 .max-width-content {
     width: 100%;
     padding: 0 80px;
-    /* max-width: 989px; */
     margin: 0 auto;
 }
 

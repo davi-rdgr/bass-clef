@@ -1,5 +1,9 @@
 <script setup>
+import { computed } from 'vue';
+import { useLibraryStore } from '@/stores/library';
 
+const lib = useLibraryStore();
+const data = computed(() => lib.library);
 </script>
 
 <template>
@@ -21,127 +25,27 @@
                         </div>
                         <div class="library-artist-info">
                             <span class="library-title">Favoritas</span>
-                            <span class="library-subtitle">Playlist | 34 músicas</span>
+                            <span class="library-subtitle">Playlist | {{ data?.favoriteLenght ?? 0 }} músicas</span>
                         </div>
                         <div class="play-content">
                             <i class="play-btn fa-solid fa-play"></i>
                         </div>
                     </li>
-                    <li>
+
+                    <li @click="console.log(item.spotifyId)" v-for="item in data?.libraryList ?? []" :key="item.id">
                         <div class="library-artist-image">
-                            <img src="/images/example-7.png" alt="Álbum">
+                            <img :src="item.imagePath ?? '/images/example-1.png'" alt="Álbum">
                         </div>
                         <div class="library-artist-info">
-                            <span class="library-title">Supercombo</span>
-                            <span class="library-subtitle">Artista</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-4.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Toxicity</span>
-                            <span class="library-subtitle">Álbum | System of a Down</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-2.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Grey Chapter</span>
-                            <span class="library-subtitle">Álbum | Slipknot</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-5.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Dark Side of the Moon</span>
-                            <span class="library-subtitle">Álbum | Pink Floyd</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-3.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Selvagens à Procura de Lei</span>
-                            <span class="library-subtitle">Artista</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-6.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Guns And Roses</span>
-                            <span class="library-subtitle">Artista</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-2.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Grey Chapter</span>
-                            <span class="library-subtitle">Álbum | Slipknot</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-5.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">The Dark Side of the Moon</span>
-                            <span class="library-subtitle">Álbum | Pink Floyd</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-3.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Selvagens à Procura de Lei</span>
-                            <span class="library-subtitle">Artista</span>
-                        </div>
-                        <div class="play-content">
-                            <i class="play-btn fa-solid fa-play"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="library-artist-image">
-                            <img src="/images/example-6.png" alt="Álbum">
-                        </div>
-                        <div class="library-artist-info">
-                            <span class="library-title">Guns And Roses</span>
-                            <span class="library-subtitle">Artista</span>
+                            <span class="library-title">{{ item.name ?? 'Nome' }}</span>
+                            <span class="library-subtitle">
+                                {{
+                                    {
+                                        ARTIST: 'Artista',
+                                        ALBUM: 'Álbum'
+                                    }[item.itemType]
+                                }}
+                            </span>
                         </div>
                         <div class="play-content">
                             <i class="play-btn fa-solid fa-play"></i>
@@ -156,7 +60,6 @@
 
 <style scoped>
 aside {
-    /* max-width: 339px; */
     height: 100%;
     width: 35%;
     background-color: #0F0F0F;
@@ -197,6 +100,8 @@ aside .library-header .plus-btn {
 
 aside .library-artist-image {
     display: flex;
+    max-width: 60px;
+    max-height: 60px;
 }
 
 aside .library-content nav {
