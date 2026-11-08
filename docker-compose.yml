@@ -1,10 +1,10 @@
 services:
   mysql:
     image: mysql:8.4
-    container_name: bass-clef
+    container_name: bass_clef
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: bass-clef
+      MYSQL_DATABASE: bass_clef
       MYSQL_USER: root
       MYSQL_PASSWORD: Corpcapsule13313
       MYSQL_ROOT_PASSWORD: Corpcapsule13313
