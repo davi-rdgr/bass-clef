@@ -34,6 +34,10 @@ export const registerComponent = (app) => {
         defineAsyncComponent(() => import("./components/Library.vue"))
     )
     app.component(
+        "library-item-view",
+        defineAsyncComponent(() => import("./components/LibraryItemView.vue"))
+    )
+    app.component(
         "music-info-component",
         defineAsyncComponent(() => import("./components/MusicInfo.vue"))
     )

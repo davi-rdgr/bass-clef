@@ -1,9 +1,28 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useLibraryStore } from '@/stores/library';
 
 const lib = useLibraryStore();
 const data = computed(() => lib.library);
+
+const selected = ref(null);
+
+const openItem = (item) => {
+    selected.value = item;
+};
+
+const openFavorites = () => {
+    selected.value = {
+        itemType: 'FAVORITES',
+        name: 'Favoritas',
+        count: data.value?.favoriteLenght ?? 0
+    };
+};
+
+const closeItem = () => {
+    selected.value = null;
+};
+
 </script>
 
 <template>
@@ -19,7 +38,7 @@ const data = computed(() => lib.library);
         <div class="library-content">
             <nav>
                 <ul>
-                    <li>
+                    <li @click="openFavorites">
                         <div class="library-artist-image">
                             <img src="/images/example-1.png" alt="Álbum">
                         </div>
@@ -32,7 +51,7 @@ const data = computed(() => lib.library);
                         </div>
                     </li>
 
-                    <li @click="console.log(item.spotifyId)" v-for="item in data?.libraryList ?? []" :key="item.id">
+                    <li @click="openItem(item)" v-for="item in data?.libraryList ?? []" :key="item.id">
                         <div class="library-artist-image">
                             <img :src="item.imagePath ?? '/images/example-1.png'" alt="Álbum">
                         </div>
@@ -55,6 +74,17 @@ const data = computed(() => lib.library);
             </nav>
         </div>
     </aside>
+
+    <Teleport to="body">
+        <Transition name="item-view">
+            <library-item-view
+                v-if="selected"
+                :key="selected.spotifyId ?? selected.itemType"
+                :item="selected"
+                @close="closeItem"
+            />
+        </Transition>
+    </Teleport>
 
 </template>
 
@@ -115,6 +145,7 @@ aside .library-content ul {
 }
 
 aside .library-content li {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -174,6 +205,17 @@ aside .library-artist-info {
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
+}
+
+.item-view-enter-active,
+.item-view-leave-active {
+    transition: opacity ease 0.25s, transform ease 0.25s;
+}
+
+.item-view-enter-from,
+.item-view-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 /* ::-webkit-scrollbar-track {
