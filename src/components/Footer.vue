@@ -1,8 +1,27 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { usePlayer } from '@/composables/usePlayer';
 /* botar um svg ou lottie de um disco girando em cima da capa do álbum */
 
+const {
+    player,
+    isPlaying,
+    currentTime,
+    currentTimeRaw,
+    duration,
+    durationRaw,
+    enableRepeat,
+    enableShuffle,
+    setCurrentTrack,
+    togglePlay,
+    setMusicTime,
+    setMutedVolume,
+    setMusicVolume
+} = usePlayer();
+
 const fullscreen = ref(false);
+
+
 const undoFullscreen = () => {
     fullscreen.value = false;
 }
@@ -12,31 +31,58 @@ const undoFullscreen = () => {
 <template>
     <footer>
         <div class="player-tools">
-            <i class="repeat-btn fa-solid fa-repeat"></i>
+            <i 
+                @click="enableRepeat"
+                :class="player.repeatMode == true ? 'btns-enabled' : ''"
+                class="repeat-btn fa-solid fa-repeat">
+            </i>
             <i class="previous-btn fa-solid fa-play fa-flip-horizontal"></i>
-            <div class="play-content">
-                <i class="play-btn fa-solid fa-pause"></i>
+            <div @click="togglePlay" class="play-content">
+                <i 
+                    :class="isPlaying == true ? 'fa-pause' : 'fa-play'" 
+                    class="play-btn fa-solid">
+                </i>
             </div>
             <i class="next-btn fa-solid fa-play"></i>
-            <i class="random-btn fa-solid fa-shuffle"></i>
+            <i
+                @click="enableShuffle"
+                :class="player.shuffle == true ? 'btns-enabled' : ''" 
+                class="random-btn fa-solid fa-shuffle">
+            </i>
         </div>
-
         <div class="volume-footer">
-            <i class="speaker-btn fa-solid fa-volume-low"></i>
-            <v-slider class="v-slider-volume" hide-details></v-slider>
+            <i
+                @click="setMutedVolume"
+                :class="player.muted == true ? 'fa-volume-mute' : 'fa-volume'"
+                class="speaker-btn fa-solid">
+            </i>
+            <v-slider
+                 :model-value="player.volume"
+                 :min="0"
+                 :max="100"
+                 @update:model-value="setMusicVolume"
+                 class="v-slider-volume" 
+                 hide-details>
+            </v-slider>
         </div>
 
         <div class="track-options">
-            <div class="quality-badge">PF</div>
             <div class="option-badge">
                 <i @click="fullscreen = true" class="full-btn fa-solid fa-expand"></i>
             </div>
         </div>
 
         <div class="duration-footer">
-            <span>2:28</span>
-            <v-slider class="v-slider-duration" hide-details></v-slider>
-            <span>4:44</span>
+            <span> {{ currentTime }} </span>
+            <v-slider
+                v-model="currentTimeRaw"
+                :min="0"
+                :max="durationRaw"
+                @end="setMusicTime(currentTimeRaw)"
+                class="v-slider-duration" 
+                hide-details>
+            </v-slider>
+            <span> {{ duration }} </span>
         </div>
 
         <div class="track-info">
@@ -46,7 +92,7 @@ const undoFullscreen = () => {
         </div>
 
         <div class="track-image">
-            <img src="/images/example-image.png" alt="Music Image">
+            <img :src="player.currentTrack.artworkUrl ?? '/images/example-image.png'" alt="Music Image">
         </div>
     </footer>
     <fullscreen-player v-if="fullscreen" @undoFullscreen="undoFullscreen" />
@@ -68,17 +114,32 @@ footer .player-tools {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
+/* caixa fixa e quadrada: o ícone fica centralizado e o fundo do estado ativo não desloca nada */
 footer .player-tools .repeat-btn,
 footer .player-tools .random-btn,
 footer .player-tools .previous-btn,
 footer .player-tools .next-btn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    border-radius: 50%;
     color: #D9D9D9;
     font-size: 14px;
     cursor: pointer;
+    transition: .1s all ease;
+    /* background-color: #774e4e; */
+}
+
+.btns-enabled {
+    color: #EB5160 !important;
+    background-color: #1E1E1E !important;
 }
 
 footer .play-content {
@@ -111,6 +172,7 @@ footer .volume-footer {
 footer .volume-footer .speaker-btn {
     color: #D9D9D9;
     font-size: 14px;
+    cursor: pointer;
 }
 
 footer .track-info {
@@ -166,7 +228,6 @@ footer .track-options {
     flex-shrink: 0;
 }
 
-footer .quality-badge,
 footer .option-badge {
     width: 26px;
     height: 26px;
@@ -175,13 +236,6 @@ footer .option-badge {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-footer .quality-badge {
-    font-size: 10px;
-    font-weight: 700;
-    font-family: 'Roboto', sans-serif;
-    color: #D9D9D9;
 }
 
 footer .option-badge .full-btn {

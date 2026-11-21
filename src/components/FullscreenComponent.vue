@@ -1,7 +1,27 @@
 <script setup>
+import { ref } from 'vue';
+import { usePlayer } from '@/composables/usePlayer';
+
 const emits = defineEmits([
     "undoFullscreen"
-])
+]);
+
+const {
+        player,
+    isPlaying,
+    currentTime,
+    currentTimeRaw,
+    duration,
+    durationRaw,
+    enableRepeat,
+    enableShuffle,
+    setCurrentTrack,
+    togglePlay,
+    setMusicTime,
+    setMutedVolume,
+    setMusicVolume
+} = usePlayer();
+
 </script>
 
 <template>
@@ -19,7 +39,7 @@ const emits = defineEmits([
                 <div></div>
                 <div>
                     <div class="disco">
-                        PF
+                        <img :src="player.currentTrack.artworkUrl ?? '/images/example-image.png'" alt="Music Image">
                     </div>
                     <h2>
                         The Great Gig in the Sky
@@ -30,27 +50,55 @@ const emits = defineEmits([
                     <div class="player-footer-top">
                         <div class="">
                             <div class="player-tools">
-                                <i class="repeat-btn fa-solid fa-repeat"></i>
+                                <i 
+                                    @click="enableRepeat"
+                                    :class="player.repeatMode == true ? 'btns-enabled' : ''"
+                                    class="repeat-btn fa-solid fa-repeat">
+                                </i>
                                 <div class="">
                                     <i class="previous-btn fa-solid fa-play fa-flip-horizontal"></i>
-                                    <div class="play-content">
-                                        <i class="play-btn fa-solid fa-pause"></i>
-                                    </div>
+                                        <div @click="togglePlay" class="play-content">
+                                            <i 
+                                                :class="isPlaying == true ? 'fa-pause' : 'fa-play'" 
+                                                class="play-btn fa-solid">
+                                            </i>
+                                        </div>
                                     <i class="next-btn fa-solid fa-play"></i>
                                 </div>
                                 <div>
-                                    <i class="random-btn fa-solid fa-shuffle"></i>
+                                    <i
+                                        @click="enableShuffle"
+                                        :class="player.shuffle == true ? 'btns-enabled' : ''" 
+                                        class="random-btn fa-solid fa-shuffle">
+                                    </i>
                                 </div>
                             </div>
                             <div class="player-footer-bottom">
-                                <span>2:28</span>
-                                <v-slider class="v-slider-duration" hide-details></v-slider>
-                                <span>4:44</span>
+                                <span> {{ currentTime }} </span>
+                                    <v-slider
+                                        v-model="currentTimeRaw"
+                                        :min="0"
+                                        :max="durationRaw"
+                                        class="v-slider-duration" 
+                                        hide-details>
+                                    </v-slider>
+                                <span> {{ duration }} </span>
                             </div>
                         </div>
                         <div class="volume-footer">
-                            <i class="speaker-btn fa-solid fa-volume-low"></i>
-                            <v-slider class="v-slider-volume" hide-details></v-slider>
+                             <i
+                                @click="setMutedVolume"
+                                :class="player.muted == true ? 'fa-volume-mute' : 'fa-volume'"
+                                class="speaker-btn fa-solid">
+                            </i>
+                            <v-slider 
+                                :model-value="player.volume"
+                                :min="0"
+                                :max="100"
+                                @update:model-value="setMusicVolume"
+                                class="v-slider-volume"
+                                hide-details>
+                            </v-slider>
                         </div>
                     </div>
                 </div>
@@ -164,19 +212,19 @@ const emits = defineEmits([
 }
 
 .view .player .disco {
-    width: 430px; /* 380px */
-    height: 380px;
+    width: 420px;
+    height: 400px;
     border-radius: 14px;
-    font-size: 88px;
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
-    color: #E9E9F2;
     background: linear-gradient(145deg, #2A2930 0%, #141318 100%);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
     opacity: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.view .player .disco img {
+    width: 100%;
 }
 
 .view .player h2 {
@@ -208,7 +256,7 @@ const emits = defineEmits([
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 50px;
+    gap: 34px;
 }
 
 .volume-footer .speaker-btn,
@@ -219,6 +267,25 @@ const emits = defineEmits([
     color: #D9D9D9;
     font-size: 16px;
     cursor: pointer;
+}
+
+.player-tools .repeat-btn,
+.player-tools .random-btn,
+.player-tools .previous-btn,
+.player-tools .next-btn {
+    /* caixa fixa e quadrada: o ícone fica centralizado e o fundo do estado ativo não desloca nada */
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    border-radius: 50%;
+}
+
+.btns-enabled {
+    color: #EB5160 !important;
+    background-color: #1E1E1E !important;
 }
 
 .player .play-content {
@@ -244,7 +311,7 @@ const emits = defineEmits([
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
 .player .volume-footer {
