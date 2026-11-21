@@ -4,7 +4,7 @@ export default class UserRepository {
     async getHome() {
         try {
             const response = await api.get(
-                '/user/me'
+                '/users/me'
             );
             return response.data;
         } catch (error) {

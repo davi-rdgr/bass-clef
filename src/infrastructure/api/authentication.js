@@ -4,7 +4,7 @@ export default class AuthenticationRepository {
     async register(data) {
         try {
             const response = await api.post(
-                '/user/auth/register', data
+                '/auth/register', data
             );
             return response.data;
         } catch (error) {
@@ -15,7 +15,7 @@ export default class AuthenticationRepository {
     async login(data) {
         try {
             const response = await api.post(
-                '/user/auth/login', data
+                '/auth/login', data
             );
             return response.data;
         } catch (error) {
