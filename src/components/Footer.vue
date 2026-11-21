@@ -86,9 +86,9 @@ const undoFullscreen = () => {
         </div>
 
         <div class="track-info">
-            <span class="track-album">The Dark Side of the Moon</span>
-            <span class="track-title">The Great Gig in the Sky</span>
-            <span class="track-artist">Pink Floyd</span>
+            <span class="track-album">{{ player.currentTrack.album ?? '' }}</span>
+            <span class="track-title">{{ player.currentTrack.name ?? '' }}</span>
+            <span class="track-artist">{{ player.currentTrack.artist ?? '' }}</span>
         </div>
 
         <div class="track-image">

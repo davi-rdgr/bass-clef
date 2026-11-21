@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import AlbumRepository from '@/infrastructure/api/albums';
-import PlayerRepository from '@/infrastructure/api/player';
+import { usePlayer } from '@/composables/usePlayer';
 
 /*
     item: { name, imagePath, itemType: 'ARTIST' | 'ALBUM' | 'FAVORITES', spotifyId, count }
@@ -13,6 +13,37 @@ const props = defineProps({
 const emits = defineEmits([
     "close"
 ]);
+
+const {
+    player,
+    isPlaying,
+    currentTime,
+    currentTimeRaw,
+    duration,
+    durationRaw,
+    enableRepeat,
+    enableShuffle,
+    setCurrentTrack,
+    togglePlay,
+    setMusicTime,
+    setMutedVolume,
+    setMusicVolume
+} = usePlayer();
+
+const playTrack = (track) => {
+    console.log(props.item)
+    if (!track) return;
+    setCurrentTrack(
+        track.id,
+        {
+            'name': track.name,
+            'artist': track.artists[0].name,
+            'album': props.item.name,
+            'image': props.item.imagePath,
+            'durationMs': track.duration_ms
+        }
+    )
+}
 
 const TYPES = {
     ARTIST: { label: 'Artista', listTitle: 'Populares' },
@@ -113,7 +144,7 @@ onUnmounted(() => {
                     </span>
                 </div>
 
-                <div v-for="item in list" :key="item.id" class="row">
+                <div @click="playTrack(item)" v-for="item in list" :key="item.id" class="row">
                     <span class="col-index">
                         <span class="number">
                             {{ item.track_number }}

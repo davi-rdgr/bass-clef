@@ -12,9 +12,16 @@ export const usePlayerStore = defineStore('playerStore', () => {
     const shuffle = ref(false);
     const muted = ref(false);
     const musicId = ref(null);
-    
+
     const setCurrentTrack = async (id, trackData) => {
-        currentTrack.value = await repository.getTrack(id, trackData);
+        const track = await repository.getTrack(id, trackData);
+        currentTrack.value = {
+            ...track,
+            name: trackData.name,
+            artist: trackData.artist,
+            album: trackData.album,
+            image: trackData.image
+        };
     }
 
     return {

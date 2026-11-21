@@ -1,19 +1,35 @@
 <script setup>
+import { usePlayer } from '@/composables/usePlayer';
 
+const {
+    player,
+    isPlaying,
+    currentTime,
+    currentTimeRaw,
+    duration,
+    durationRaw,
+    enableRepeat,
+    enableShuffle,
+    setCurrentTrack,
+    togglePlay,
+    setMusicTime,
+    setMutedVolume,
+    setMusicVolume
+} = usePlayer();
 </script>
 
 <template>
     <aside>
         <div class="info-content">
             <div class="presentation-content">
-                <img class="artist-image" src="/images/example-big-image.png" alt="Artist Image">
+                <img class="artist-image" :src="player.currentTrack.image ?? player.currentTrack.artworkUrl" alt="Artist Image">
                 <div class="presentation-artist-content">
                     <div class="">
                         <span class="info-title-presentation">
-                            The Great Gig in The Sky
+                            {{ player.currentTrack.name }}
                         </span>
                         <span class="info-subtitle-presentation">
-                            Pink Floyd
+                            {{ player.currentTrack.artist }}
                         </span>
                     </div>
                     <i class="add-btn fa-solid fa-circle-plus"></i>

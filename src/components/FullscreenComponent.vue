@@ -28,7 +28,7 @@ const {
     <div class="view">
         <header>
             <h4>
-                TOCANDO THE DARK SIDE OF THE MOON
+                TOCANDO {{ player.currentTrack.album.toUpperCase() }}
             </h4>
             <div class="btn-content" @click="emits('undoFullscreen')">
                 <i class="close-icon fa-solid fa-close"></i>
@@ -39,13 +39,13 @@ const {
                 <div></div>
                 <div>
                     <div class="disco">
-                        <img :src="player.currentTrack.artworkUrl ?? '/images/example-image.png'" alt="Music Image">
+                        <img :src="player.currentTrack.image ?? player.currentTrack.artworkUrl" alt="Music Image">
                     </div>
                     <h2>
-                        The Great Gig in the Sky
+                        {{ player.currentTrack.name }}
                     </h2>
                     <h3>
-                        Pink Floyd
+                        {{ player.currentTrack.artist }}
                     </h3>
                     <div class="player-footer-top">
                         <div class="">
