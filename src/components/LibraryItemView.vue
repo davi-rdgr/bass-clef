@@ -31,13 +31,13 @@ const {
 } = usePlayer();
 
 const playTrack = (track) => {
-    console.log(props.item)
     if (!track) return;
     setCurrentTrack(
         track.id,
         {
             'name': track.name,
             'artist': track.artists[0].name,
+            'artistId': track.artists[0].id,
             'album': props.item.name,
             'image': props.item.imagePath,
             'durationMs': track.duration_ms

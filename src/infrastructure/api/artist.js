@@ -22,4 +22,22 @@ export default class ArtistRepository {
             throw error;
         }
     }
+
+    async getInfo(id, name, lang) {
+        const response = await api.get(`/artists/${id}/info`, {
+            params: { name, lang }
+        });
+        return response.data;
+    }
+
+    async getSimilar(id, name, limit) {
+        try {
+            const response = await api.get(`/artists/${id}/similar`, {
+                params: { name, limit }
+            });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

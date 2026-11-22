@@ -22,7 +22,8 @@ const {
     <aside>
         <div class="info-content">
             <div class="presentation-content">
-                <img class="artist-image" :src="player.currentTrack.image ?? player.currentTrack.artworkUrl" alt="Artist Image">
+                <img class="artist-image" :src="player.currentTrack.image ?? player.currentTrack.artworkUrl"
+                    alt="Artist Image">
                 <div class="presentation-artist-content">
                     <div class="">
                         <span class="info-title-presentation">
@@ -40,7 +41,7 @@ const {
                     Talvez você conheça
                 </span>
                 <div class="info-title-content-maybe">
-                    <div class="info-title-card-maybe">
+                    <!-- <div class="info-title-card-maybe">
                         <img src="/images/example-5.png" alt="Music Suggestion">
                         <div class="">
                             <span class="info-title-maybe">
@@ -61,6 +62,18 @@ const {
                                 Pink Floyd
                             </span>
                         </div>
+                    </div> -->
+                    <div v-for="item in player.currentTrack.similar ?? []" :key="item.id ?? item.name"
+                        class="info-title-card-maybe">
+                        <img :src="item.imageUrl" alt="Music Suggestion">
+                        <div class="">
+                            <span class="info-title-maybe">
+                                {{ item.name ?? '' }}
+                            </span>
+                            <span class="info-subtitle-maybe">
+                                {{ item.artist ?? '' }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,14 +82,14 @@ const {
                     Sobre o artista
                 </span>
                 <div class="">
-                    <img class="info-image-about" src="/images/example-band-image.png" alt="Band images">
+                    <img class="info-image-about" :src="player.currentTrack.info.imageUrl" alt="Band images">
                     <div class="info-about-content">
                         <div class="info-about-card-content">
                             <span class="info-title-about">
-                                Pink Floyd
+                                {{ player.currentTrack.artist }}
                             </span>
                             <span class="info-subtitle-about">
-                                123.423.241 ouvintes mensais
+                                {{ player.currentTrack.info.listeners.toLocaleString('pt-BR') ?? 'Sem informações de ' }} ouvintes mensais
                             </span>
                         </div>
                         <a href="">
@@ -85,9 +98,7 @@ const {
                     </div>
                     <div class="info-about-text">
                         <span>
-                            Pink Floyd foi uma banda britânica de rock formada em Londres em 1965. Ganhando seguidores
-                            como um grupo de rock psicodélico, eles se destacaram por suas composições longas, pela
-                            experimentação sonora, pelas …
+                            {{ player.currentTrack.info.bio.summary }}
                         </span>
                     </div>
                 </div>
@@ -201,6 +212,7 @@ aside .info-title-card-maybe img {
     width: 60px;
     height: 60px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 aside .info-title-maybe {
@@ -233,7 +245,9 @@ aside .info-title-span-about {
 }
 
 aside .info-image-about {
+    object-fit: cover;
     width: 100%;
+    border-radius: 5px;
 }
 
 aside .info-about-content {

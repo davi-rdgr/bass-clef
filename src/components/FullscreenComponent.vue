@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { usePlayer } from '@/composables/usePlayer';
 
 const emits = defineEmits([
@@ -21,6 +21,18 @@ const {
     setMutedVolume,
     setMusicVolume
 } = usePlayer();
+
+const formattedLyrics = computed(() => {
+    const raw = player.currentTrack?.lyrics?.trim();
+    if (!raw) return null;
+
+    // Se a letra já vem com quebras de linha, só normaliza.
+    if (raw.includes('\n')) return raw.replace(/\r\n?/g, '\n');
+
+    // Letra "colada": quebra quando uma maiúscula vem logo após
+    // minúscula/número/pontuação sem espaço (ex.: "loveAnd" -> "love\nAnd").
+    return raw.replace(/([a-zà-ÿ0-9.,!?'")\]])(?=[A-ZÀ-Ý])/g, '$1\n');
+});
 
 </script>
 
@@ -110,9 +122,7 @@ const {
                 <span class="title">
                     LETRA
                 </span>
-                <span class="subtitle">
-                    Letra não disponível para esta faixa.
-                </span>
+                <span class="subtitle lyrics">{{ formattedLyrics ?? 'Letra não disponível para esta faixa.' }}</span>
                 <div class="line"></div>
                 <span class="soon">
                     A SEGUIR
@@ -394,6 +404,12 @@ const {
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: #FFFFFFB8;
+}
+
+.list .lyrics {
+    display: block;
+    white-space: pre-line;
+    line-height: 1.6;
 }
 
 .list .line {
